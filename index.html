@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Spirits — Blackhat Distillery (PDP Concept)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;0,6..12,900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#ffffff;
+    --paper-2:#f5f4f3;
+    --paper-3:#e9e7e5;
+    --ink:#211818;
+    --ink-soft:#5c5555;
+    --brass:#c79a45;
+    --brass-light:#ebc37c;
+    --brass-dark:#93691f;
+    --ox:#660404;
+    --ox-light:#8a1414;
+    --sage:#7eaa8b;
+    --sage-deep:#4f7a63;
+    --gray:#c4c4c4;
+    --line: rgba(33,24,24,0.14);
+    --line-strong: rgba(33,24,24,0.26);
+
+    --black-bg:#211818;
+    --black-bg-2:#2c2220;
+    --cream:#efe9e5;
+    --cream-dim:#c4c4c4;
+    --stone:#96908c;
+    --line-d: rgba(255,255,255,0.14);
+    --line-d-strong: rgba(255,255,255,0.26);
+
+    --shadow: 0 26px 54px -22px rgba(33,24,24,0.30);
+    --shadow-dark: 0 30px 60px -20px rgba(0,0,0,0.6);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Nunito Sans',sans-serif;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{ background:var(--brass-light); color:var(--ink); }
+  h1,h2,h3,h4{ font-family:'EB Garamond', serif; font-weight:600; margin:0; letter-spacing:-0.01em; }
+  .eyebrow{ font-family:'Nunito Sans', sans-serif; font-weight:800; letter-spacing:0.2em; text-transform:uppercase; font-size:12.5px; color:var(--ox); }
+  .eyebrow.on-dark{ color:var(--brass-light); }
+  a{ color:inherit; text-decoration:none; }
+  img,svg{ display:block; max-width:100%; }
+  button{ font-family:inherit; cursor:pointer; }
+  .wrap{ max-width:1240px; margin:0 auto; padding:0 32px; }
+
+  /* ===== Top bar (black) ===== */
+  .topbar{
+    background:var(--black-bg); border-bottom:1px solid var(--line-d);
+    font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--stone);
+    text-align:center; padding:8px 16px;
+  }
+  .topbar b{ color:var(--brass-light); font-weight:700; }
+
+  /* ===== Header (black section) ===== */
+  header{
+    position:sticky; top:0; z-index:500;
+    background:rgba(12,10,8,0.92); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-d);
+  }
+  .headrow{ display:flex; align-items:center; justify-content:space-between; padding:14px 32px; max-width:1240px; margin:0 auto; }
+  .logo{ display:flex; align-items:center; gap:12px; }
+  .logo-mark{
+    width:42px; height:42px; border-radius:50%; background:var(--cream); padding:3px;
+    box-shadow:0 0 0 1px var(--brass-light); overflow:hidden; flex:none;
+  }
+  .logo-mark img{ width:100%; height:100%; object-fit:cover; border-radius:50%; }
+  .logo-word{ font-family:'Nunito Sans', sans-serif; font-weight:900; font-size:20px; letter-spacing:0.06em; color:#fff; line-height:1; }
+  .logo-word span{ color:#fff; }
+  .logo-sub{ font-size:9.5px; letter-spacing:0.18em; text-transform:uppercase; color:var(--stone); margin-top:3px; }
+  nav.mainnav{ display:flex; gap:34px; }
+  nav.mainnav a{ font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--cream-dim); position:relative; padding-bottom:4px; transition:color .25s; }
+  nav.mainnav a::after{ content:""; position:absolute; left:0; right:100%; bottom:0; height:1px; background:var(--brass-light); transition:right .3s ease; }
+  nav.mainnav a:hover{ color:var(--cream); }
+  nav.mainnav a:hover::after{ right:0; }
+  .head-actions{ display:flex; align-items:center; gap:20px; }
+  .cart-btn{ position:relative; display:flex; align-items:center; gap:6px; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--cream); }
+  .cart-count{ background:var(--ox-light); color:#fff; font-size:10px; font-weight:700; border-radius:50%; width:17px; height:17px; display:flex; align-items:center; justify-content:center; position:absolute; top:-9px; right:-11px; transition:transform .3s; }
+  .cart-count.bump{ animation:bump .4s ease; }
+  @keyframes bump{ 0%{transform:scale(1);} 40%{transform:scale(1.5);} 100%{transform:scale(1);} }
+
+  /* ===== Breadcrumb (light) ===== */
+  .crumbs{ padding:22px 32px 0; max-width:1240px; margin:0 auto; font-size:12.5px; color:var(--ink-soft); letter-spacing:.03em; }
+  .crumbs a:hover{ color:var(--ox); }
+  .crumbs .sep{ margin:0 8px; color:var(--gray); }
+  .crumbs .current{ color:var(--ink); font-weight:600; }
+
+  /* ===== PDP main (light) ===== */
+  .pdp{ display:grid; grid-template-columns:1.05fr 0.95fr; gap:70px; padding:36px 32px 90px; max-width:1240px; margin:0 auto; }
+
+  .gallery-stage{
+    position:relative; aspect-ratio:4/5; border-radius:20px; overflow:hidden;
+    background:var(--paper);
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:var(--shadow); transform-style:preserve-3d; cursor:zoom-in;
+  }
+  .gallery-stage .ground-shadow{
+    position:absolute; bottom:8%; width:46%; height:8%; border-radius:50%;
+    background:radial-gradient(ellipse, rgba(33,24,24,0.35), transparent 72%);
+    filter:blur(4px);
+  }
+  .badge-corner{
+    position:absolute; top:18px; left:18px; z-index:3;
+    background:rgba(255,255,255,0.88); border:1px solid var(--line-strong);
+    padding:6px 12px; border-radius:999px; font-size:10.5px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--brass-dark); backdrop-filter:blur(6px); font-weight:700;
+  }
+  .zoom-hint{
+    position:absolute; bottom:16px; right:16px; font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-soft); display:flex; gap:6px; align-items:center; opacity:0; transition:opacity .3s;
+  }
+  .gallery-stage:hover .zoom-hint{ opacity:1; }
+  .bottle-scene{ position:relative; width:56%; height:80%; transition:transform .15s ease-out; will-change:transform; display:flex; align-items:center; justify-content:center; z-index:2;}
+  .bottle-scene img{ max-width:100%; max-height:100%; object-fit:contain; filter:drop-shadow(0 22px 26px rgba(33,24,24,0.28)); transition:opacity .2s; }
+
+  .thumbs-label{ display:flex; justify-content:space-between; align-items:baseline; margin-top:22px; margin-bottom:12px; }
+  .thumbs-label .eyebrow{ font-size:11.5px; }
+  .thumbs-label span.hint{ font-size:11px; color:var(--ink-soft); }
+  .thumbs{ display:flex; gap:12px; }
+  .thumb{
+    flex:1; aspect-ratio:1; border-radius:12px; border:1px solid var(--line);
+    background:var(--paper);
+    display:flex; align-items:center; justify-content:center; position:relative;
+    overflow:hidden; transition:border-color .2s, transform .2s;
+  }
+  .thumb img{ max-width:62%; max-height:62%; object-fit:contain; filter:drop-shadow(0 6px 8px rgba(33,24,24,0.22)); }
+  .thumb.active{ border-color:var(--brass); box-shadow:0 0 0 1px var(--brass); }
+  .thumb:hover{ transform:translateY(-3px); }
+  .thumb .cap{
+    position:absolute; bottom:0; left:0; right:0; font-size:9.5px; text-align:center;
+    letter-spacing:.06em; text-transform:uppercase; color:var(--ink); padding:4px 0 5px;
+    background:linear-gradient(0deg, rgba(255,255,255,.95), transparent);
+    font-weight:700;
+  }
+
+  /* buy box */
+  .buybox .eyebrow{ margin-bottom:14px; display:block; }
+  .buybox h1{ font-size:44px; line-height:1.05; margin-bottom:6px; }
+  .buybox .subline{ font-family:'EB Garamond', serif; font-style:italic; color:var(--ink-soft); font-size:16.5px; margin-bottom:22px; }
+
+  .awardrow{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:22px; min-height:34px; }
+  .award-pill{
+    position:relative; display:flex; align-items:center; gap:7px;
+    border:1px solid var(--line-strong); border-radius:999px; padding:7px 13px 7px 9px;
+    font-size:11.5px; letter-spacing:.03em; color:var(--ink-soft); background:var(--paper-2);
+  }
+  .award-pill svg{ width:15px; height:15px; flex:none; }
+  .award-pill .tip{
+    position:absolute; bottom:calc(100% + 10px); left:50%; transform:translateX(-50%) translateY(4px);
+    background:var(--black-bg); border:1px solid var(--line-d-strong); padding:10px 13px; border-radius:10px;
+    width:210px; font-size:11.5px; line-height:1.4; color:var(--cream-dim); opacity:0; pointer-events:none;
+    transition:opacity .2s, transform .2s; box-shadow:var(--shadow-dark); z-index:10;
+  }
+  .award-pill .tip b{ color:var(--brass-light); display:block; margin-bottom:2px; font-size:12px;}
+  .award-pill:hover .tip{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  .desc{ color:var(--ink-soft); line-height:1.75; font-size:15px; max-width:48ch; margin-bottom:26px; }
+  .desc b{ color:var(--ink); font-weight:700; }
+
+  .specpills{ display:flex; gap:9px; flex-wrap:wrap; margin-bottom:28px; }
+  .specpill{ border:1px solid var(--line); border-radius:8px; padding:9px 13px; font-size:12px; color:var(--ink-soft); letter-spacing:.03em; text-transform:uppercase; background:var(--paper-2); }
+  .specpill b{ color:var(--ink); display:block; font-family:'EB Garamond',serif; font-size:15px; letter-spacing:0; text-transform:none; margin-bottom:2px; }
+
+  .flavorpills{ display:flex; gap:7px; flex-wrap:wrap; margin-bottom:22px; }
+  .flavorpill{ border:1px solid var(--sage); border-radius:20px; padding:5px 13px; font-size:11.5px; color:var(--sage-deep); letter-spacing:.02em; background:rgba(126,170,139,0.1); font-family:'Nunito Sans',sans-serif; }
+
+  .priceline{ display:flex; align-items:baseline; gap:12px; margin-bottom:6px; }
+  .price{ font-family:'EB Garamond', serif; font-size:32px; color:var(--brass-dark); }
+  .price-note{ font-size:11px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.08em; border:1px dashed var(--gray); padding:3px 8px; border-radius:6px;}
+  .skuline{ font-size:11.5px; color:var(--ink-soft); letter-spacing:.03em; margin-bottom:20px; font-family:'Nunito Sans',sans-serif; }
+  .size-select{ margin:20px 0 22px; }
+  .size-select .label{ font-size:11.5px; text-transform:uppercase; letter-spacing:.12em; color:var(--ink-soft); margin-bottom:9px; }
+  .size-options{ display:flex; gap:10px; }
+  .size-opt{ border:1px solid var(--line-strong); padding:10px 16px; border-radius:9px; font-size:13.5px; background:var(--paper); color:var(--ink-soft); transition:all .2s; }
+  .size-opt.selected{ border-color:var(--brass); color:var(--brass-dark); background:rgba(235,195,124,0.22); font-weight:700; }
+  .size-opt:disabled{ opacity:.4; cursor:not-allowed; text-decoration:line-through; }
+
+  .buyrow{ display:flex; gap:14px; align-items:stretch; }
+  .qty{ display:flex; align-items:center; border:1px solid var(--line-strong); border-radius:10px; overflow:hidden; background:var(--paper); }
+  .qty button{ background:transparent; border:none; color:var(--ink); width:42px; font-size:18px; }
+  .qty button:hover{ background:var(--paper-2); }
+  .qty input{ width:42px; text-align:center; background:transparent; border:none; color:var(--ink); font-size:15px; font-family:'Nunito Sans'; border-left:1px solid var(--line); border-right:1px solid var(--line); }
+  .addcart{
+    flex:1; background:linear-gradient(135deg, #ebc37c, #b8862f);
+    color:var(--ink); border:none; border-radius:10px; font-weight:800; letter-spacing:.06em;
+    text-transform:uppercase; font-size:13.5px; display:flex; align-items:center; justify-content:center; gap:10px;
+    transition:transform .25s, box-shadow .25s; box-shadow:0 12px 26px -10px rgba(235,195,124,0.5);
+  }
+  .addcart:hover{ transform:translateY(-2px); box-shadow:0 18px 34px -10px rgba(235,195,124,0.65); }
+  .addcart.added{ background:linear-gradient(135deg,#7eaa8b,#4f7a63); color:#fff; }
+
+  .microcopy{ margin-top:16px; font-size:12px; color:var(--ink-soft); display:flex; gap:8px; align-items:flex-start; line-height:1.5; }
+
+  .trustrow{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:30px; padding-top:26px; border-top:1px solid var(--line); }
+  .trust{ text-align:center; }
+  .trust svg{ width:26px; height:26px; margin:0 auto 8px; color:var(--brass); }
+  .trust span{ display:block; font-size:11px; letter-spacing:.04em; color:var(--ink-soft); line-height:1.4; }
+
+  /* ===== Sticky bar (black, floats over light page) ===== */
+  .stickybar{ position:fixed; left:0; right:0; bottom:-100px; z-index:600; background:rgba(12,10,8,0.94); backdrop-filter:blur(12px); border-top:1px solid var(--line-d-strong); transition:bottom .35s ease; box-shadow:0 -10px 30px rgba(0,0,0,0.25); }
+  .stickybar.show{ bottom:0; }
+  .stickybar-in{ max-width:1240px; margin:0 auto; padding:12px 32px; display:flex; align-items:center; gap:18px; color:var(--cream); }
+  .stickybar-in .mini-bottle{ width:30px; height:44px; object-fit:contain; }
+  .stickybar-in .info{ flex:1; }
+  .stickybar-in .name{ font-family:'EB Garamond',serif; font-size:15px; }
+  .stickybar-in .sub{ font-size:11px; color:var(--stone); }
+  .stickybar-in .price{ font-size:18px; color:var(--brass-light); }
+  .stickybar .qty{ border-color:var(--line-d-strong); background:transparent; }
+  .stickybar .qty button, .stickybar .qty input{ color:var(--cream); }
+  .stickybar .qty input{ border-left:1px solid var(--line-d); border-right:1px solid var(--line-d); }
+  .stickybar .addcart{ padding:12px 22px; flex:none; }
+
+  /* ===== Tabs (light) ===== */
+  .tabsection{ padding:10px 32px 100px; max-width:1240px; margin:0 auto; }
+  .tabbar{ display:flex; gap:6px; border-bottom:1px solid var(--line); margin-bottom:44px; flex-wrap:wrap; }
+  .tabbtn{ background:none; border:none; color:var(--ink-soft); padding:16px 22px; font-size:13.5px; letter-spacing:.06em; text-transform:uppercase; position:relative; transition:color .2s; }
+  .tabbtn::after{ content:""; position:absolute; left:22px; right:22px; bottom:-1px; height:2px; background:var(--ox); transform:scaleX(0); transition:transform .25s; }
+  .tabbtn.active{ color:var(--ink); }
+  .tabbtn.active::after{ transform:scaleX(1); }
+  .tabpanel{ display:none; animation:fadein .4s ease; }
+  .tabpanel.active{ display:block; }
+  @keyframes fadein{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+
+  .notegrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .notecard{ background:var(--paper-2); border:1px solid var(--line); border-radius:16px; padding:28px 26px; position:relative; overflow:hidden; }
+  .notecard::before{ content:""; position:absolute; top:-40%; right:-40%; width:80%; height:80%; border-radius:50%; background:radial-gradient(circle, rgba(235,195,124,0.16), transparent 70%); }
+  .notecard .num{ font-family:'Nunito Sans'; font-weight:800; font-size:12px; color:var(--brass-dark); letter-spacing:.16em; position:relative; }
+  .notecard h3{ font-size:22px; margin:10px 0 12px; position:relative; }
+  .notecard p{ color:var(--ink-soft); line-height:1.7; font-size:14.5px; position:relative; }
+  .footnote{ font-size:11.5px; color:var(--ink-soft); margin-top:26px; max-width:60ch; }
+
+  .craftgrid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:start; }
+  .craftgrid p{ color:var(--ink-soft); line-height:1.85; font-size:15.5px; margin-bottom:18px; }
+  .craftgrid p:first-of-type::first-letter{ font-family:'EB Garamond',serif; font-size:56px; float:left; line-height:0.8; padding:8px 10px 0 0; color:var(--brass-dark); }
+  .quoteblock{ border-left:2px solid var(--ox); padding-left:22px; font-family:'EB Garamond',serif; font-style:italic; font-size:19px; line-height:1.6; color:var(--ink); margin:26px 0; }
+  .quoteblock cite{ display:block; font-family:'Nunito Sans'; font-style:normal; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); margin-top:10px; }
+
+  .factlist{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:16px; }
+  .factlist li{ display:flex; gap:14px; align-items:flex-start; padding:16px; background:var(--paper-2); border:1px solid var(--line); border-radius:12px; }
+  .factlist svg{ width:20px; height:20px; flex:none; color:var(--brass-dark); margin-top:2px; }
+  .factlist b{ display:block; font-size:13.5px; letter-spacing:.03em; margin-bottom:3px; }
+  .factlist span{ font-size:12.5px; color:var(--ink-soft); line-height:1.5; }
+
+  .awardgrid{ display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+  .awardcard{ display:flex; gap:20px; align-items:center; background:var(--paper-2); border:1px solid var(--line); border-radius:16px; padding:26px; transition:border-color .25s, transform .25s; }
+  .awardcard:hover{ border-color:var(--brass); transform:translateY(-3px); }
+  .awardcard .medal{ width:56px; height:56px; flex:none; }
+  .awardcard h4{ font-size:17px; margin-bottom:4px; }
+  .awardcard span{ font-size:12.5px; color:var(--ink-soft); }
+  .noawards{ color:var(--ink-soft); font-size:14.5px; line-height:1.7; max-width:60ch; }
+
+  .servewrap{ display:grid; grid-template-columns:1fr 1fr; gap:50px; }
+  .accordion{ border-top:1px solid var(--line); }
+  .acc-item{ border-bottom:1px solid var(--line); }
+  .acc-head{ width:100%; background:none; border:none; color:var(--ink); text-align:left; padding:20px 4px; display:flex; justify-content:space-between; align-items:center; font-family:'EB Garamond',serif; font-size:17px; }
+  .acc-head .plus{ font-family:'Nunito Sans'; font-size:20px; color:var(--brass-dark); transition:transform .3s; }
+  .acc-item.open .plus{ transform:rotate(45deg); }
+  .acc-body{ max-height:0; overflow:hidden; transition:max-height .35s ease; }
+  .acc-item.open .acc-body{ max-height:260px; }
+  .acc-body-in{ padding:0 4px 22px; color:var(--ink-soft); font-size:14px; line-height:1.75; }
+  .acc-body-in ul{ margin:10px 0 0; padding-left:18px; }
+  .acc-body-in li{ margin-bottom:4px; }
+  .servenote{ background:var(--paper-2); border:1px solid var(--line); border-radius:16px; padding:26px; height:fit-content; }
+  .servenote .eyebrow{ margin-bottom:10px; }
+  .servenote p{ color:var(--ink-soft); font-size:14.5px; line-height:1.7; }
+
+  /* ===== Brand Story (BLACK section) ===== */
+  .story{ background:
+      repeating-linear-gradient(to bottom, rgba(255,255,255,0.035) 0px, rgba(255,255,255,0.035) 2px, transparent 2px, transparent 40px),
+      repeating-linear-gradient(to bottom, rgba(0,0,0,0.4) 0px, rgba(0,0,0,0.4) 1px, transparent 1px, transparent 40px),
+      linear-gradient(180deg, var(--black-bg-2), var(--black-bg));
+    border-top:1px solid var(--line-d); border-bottom:1px solid var(--line-d); padding:96px 32px; color:var(--cream); }
+  .story-in{ max-width:1240px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+  .story h2{ font-size:34px; margin:12px 0 18px; color:var(--cream); }
+  .story p{ color:var(--cream-dim); line-height:1.8; font-size:15.5px; margin-bottom:16px; max-width:54ch; }
+  .story .sig{ font-family:'EB Garamond',serif; font-style:italic; color:var(--brass-light); font-size:16px; margin-top:20px; }
+  .story-photos{ position:relative; height:440px; }
+  .story-photo{ position:absolute; border-radius:14px; overflow:hidden; border:1px solid var(--line-d-strong); box-shadow:var(--shadow-dark); }
+  .story-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .story-photo.p1{ width:62%; height:88%; top:0; left:0; z-index:2; }
+  .story-photo.p2{ width:52%; height:60%; bottom:0; right:0; z-index:3; transform:rotate(2deg); }
+  .story-photo .cap{ position:absolute; bottom:0; left:0; right:0; padding:10px 12px 8px; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--cream-dim); background:linear-gradient(0deg, rgba(0,0,0,0.75), transparent); }
+  .story-badge{ position:absolute; top:-14px; right:6%; z-index:4; background:var(--brass-light); color:var(--ink); font-family:'Nunito Sans'; font-weight:800; letter-spacing:.1em; font-size:11px; padding:8px 16px; border-radius:999px; box-shadow:var(--shadow-dark); }
+
+  /* ===== Lineup (light) ===== */
+  .lineup{ padding:100px 32px; max-width:1240px; margin:0 auto; }
+  .lineup-head{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:44px; flex-wrap:wrap; gap:14px; }
+  .lineup-head h2{ font-size:32px; }
+  .lineup-head p{ color:var(--ink-soft); font-size:13.5px; max-width:40ch; }
+  .lineup-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
+  .linecard{ background:var(--paper-2); border:1px solid var(--line); border-radius:18px; padding:26px; transition:transform .3s, border-color .3s; position:relative; overflow:hidden; cursor:pointer; }
+  .linecard:hover{ transform:translateY(-6px); border-color:var(--brass); }
+  .linecard .lc-bottle{ height:150px; display:flex; align-items:center; justify-content:center; margin-bottom:18px; }
+  .linecard .lc-bottle img{ max-height:100%; max-width:80%; object-fit:contain; filter:drop-shadow(0 14px 16px rgba(33,24,24,0.25)); }
+  .linecard h3{ font-size:18px; margin-bottom:6px; }
+  .linecard .lc-spec{ font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--brass-dark); margin-bottom:10px; font-weight:700; }
+  .linecard p{ font-size:12.5px; color:var(--ink-soft); line-height:1.6; margin-bottom:16px; min-height:48px; }
+  .linecard .lc-link{ font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink); border-bottom:1px solid var(--brass); padding-bottom:2px; }
+  .linecard.current{ border-color:var(--brass); background:#fbeed8; }
+  .linecard.current::after{
+    content:"Viewing Now"; position:absolute; top:16px; right:-30px; transform:rotate(35deg);
+    background:var(--ox); color:#fff; font-size:9.5px; font-weight:800; letter-spacing:.06em;
+    padding:4px 38px; text-transform:uppercase;
+  }
+
+  /* ===== Footer (BLACK) ===== */
+  footer{ background:
+      repeating-linear-gradient(to bottom, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 40px),
+      repeating-linear-gradient(to bottom, rgba(0,0,0,0.35) 0px, rgba(0,0,0,0.35) 1px, transparent 1px, transparent 40px),
+      var(--black-bg);
+    border-top:1px solid var(--line-d); padding:56px 32px 40px; color:var(--cream); }
+  .foot-in{ max-width:1240px; margin:0 auto; display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; }
+  .foot-left{ display:flex; gap:14px; align-items:flex-start; max-width:38ch; }
+  .foot-left .logo-mark{ margin-top:2px; }
+  .foot-left p{ color:var(--stone); font-size:12px; margin-top:8px; line-height:1.6; }
+  .foot-right{ display:flex; gap:60px; flex-wrap:wrap; }
+  .foot-col span{ display:block; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--brass-light); margin-bottom:12px; }
+  .foot-col a{ display:block; font-size:13px; color:var(--cream-dim); margin-bottom:9px; }
+  .foot-col a:hover{ color:var(--cream); }
+  .foot-bottom{ max-width:1240px; margin:34px auto 0; padding-top:24px; border-top:1px solid var(--line-d); font-size:11px; color:var(--stone); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+
+  /* ===== Lightbox ===== */
+  .lightbox{ position:fixed; inset:0; z-index:900; background:rgba(12,10,8,0.88); display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .3s; }
+  .lightbox.show{ opacity:1; pointer-events:auto; }
+  .lightbox img{ max-width:min(80vw,560px); max-height:80vh; object-fit:contain; filter:drop-shadow(0 30px 50px rgba(0,0,0,0.6)); transform:scale(.94); transition:transform .3s; }
+  .lightbox.show img{ transform:scale(1); }
+  .lightbox-close{ position:absolute; top:26px; right:32px; color:var(--cream); font-size:15px; letter-spacing:.1em; text-transform:uppercase; display:flex; gap:8px; align-items:center; border:1px solid var(--line-d-strong); padding:9px 16px; border-radius:999px; }
+
+  /* ===== Concept badge ===== */
+  .concept-badge{ position:fixed; left:20px; bottom:20px; z-index:700; background:var(--paper); border:1px solid var(--brass); border-radius:999px; padding:10px 16px; display:flex; align-items:center; gap:9px; font-size:11.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--brass-dark); box-shadow:var(--shadow); cursor:pointer; font-weight:700; }
+  .concept-badge svg{ width:15px; height:15px; }
+  .concept-panel{ position:fixed; left:20px; bottom:66px; z-index:700; width:310px; background:var(--paper); border:1px solid var(--line-strong); border-radius:14px; padding:18px 20px; box-shadow:var(--shadow); font-size:12.5px; color:var(--ink-soft); line-height:1.6; opacity:0; pointer-events:none; transform:translateY(8px); transition:all .25s; }
+  .concept-panel.show{ opacity:1; pointer-events:auto; transform:translateY(0); }
+  .concept-panel h5{ font-family:'EB Garamond',serif; color:var(--ink); font-size:14px; margin-bottom:8px; }
+  .concept-panel ul{ margin:0; padding-left:16px; }
+  .concept-panel li{ margin-bottom:6px; }
+
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  @media (max-width: 980px){
+    .pdp{ grid-template-columns:1fr; gap:40px; }
+    .craftgrid, .servewrap{ grid-template-columns:1fr; }
+    .story-in{ grid-template-columns:1fr; }
+    .story-photos{ height:340px; margin-top:20px; }
+    .lineup-grid{ grid-template-columns:1fr 1fr; }
+    .notegrid{ grid-template-columns:1fr; }
+    nav.mainnav{ display:none; }
+  }
+  @media (max-width: 620px){
+    .buybox h1{ font-size:32px; }
+    .lineup-grid{ grid-template-columns:1fr; }
+    .awardgrid{ grid-template-columns:1fr; }
+    .trustrow{ grid-template-columns:1fr; }
+    .wrap,.pdp,.tabsection,.lineup{ padding-left:20px; padding-right:20px; }
+  }
+</style>
+
+<style>
+  /* ===== Landing page additions ===== */
+  .featured-band{ background:linear-gradient(180deg, #fbeed8 0%, #ffffff 100%); border-bottom:1px solid var(--line); padding:8px 32px 0; }
+
+  .hero-header{
+    position:relative; overflow:hidden;
+    background:
+      linear-gradient(180deg, rgba(33,24,24,0.78), rgba(33,24,24,0.6) 55%, rgba(33,24,24,0.85)),
+      url('https://i.ibb.co/PsgbrL5y/pexels-haley-bee-347725846-28964990.jpg');
+    background-size:cover; background-position:center; background-attachment:fixed;
+  }
+  .hero-header-in{ padding:100px 32px 90px; }
+  .catalog-hero-label{ max-width:1240px; margin:0 auto; padding:0; text-align:center; }
+  .catalog-hero-label .eyebrow{ display:block; margin-bottom:10px; }
+  .catalog-hero-label h1{ font-size:44px; margin-bottom:14px; color:#fff; }
+  .catalog-hero-label p{ color:var(--cream-dim); font-size:14.5px; max-width:56ch; margin:0 auto; }
+  .hero-banner-card{ display:inline-block; margin:38px auto 0; }
+  .hero-banner{ display:block; max-width:780px; width:100%; }
+
+  @media (max-width: 980px){
+    .hero-header{ background-attachment:scroll; }
+  }
+
+  .catsection{ padding:80px 32px; max-width:1240px; margin:0 auto; }
+  .catsection-head{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:36px; flex-wrap:wrap; gap:14px; }
+  .catsection-head h2{ font-size:28px; }
+  .catsection-head p{ color:var(--ink-soft); font-size:13px; max-width:44ch; }
+  .catgrid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  .catgrid.cols-3{ grid-template-columns:repeat(3,1fr); }
+  .catgrid.cols-5{ grid-template-columns:repeat(5,1fr); }
+
+  .pcard{ background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:20px; display:flex; flex-direction:column; transition:transform .25s, border-color .25s; position:relative; }
+  .pcard:hover{ transform:translateY(-4px); border-color:var(--brass); }
+  .pcard .pc-cat{ font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ox); font-weight:800; margin-bottom:10px; }
+  .pcard .pc-img{ height:150px; display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+  .pcard .pc-img img{ max-height:100%; max-width:74%; object-fit:contain; filter:drop-shadow(0 12px 14px rgba(33,24,24,0.22)); }
+  .pcard .pc-img.placeholder{ background:var(--paper-2); border:1px dashed var(--line-strong); border-radius:10px; flex-direction:column; gap:6px; }
+  .pcard .pc-img.placeholder span{ font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); }
+  .pcard .pc-img.placeholder svg{ width:30px; height:30px; color:var(--gray); }
+  .pcard h3{ font-size:17px; margin-bottom:4px; }
+  .pcard .pc-flavor{ font-family:'EB Garamond',serif; font-style:italic; color:var(--ink-soft); font-size:13px; margin-bottom:8px; }
+  .pcard .pc-desc{ font-size:12px; color:var(--ink-soft); line-height:1.55; margin-bottom:12px; min-height:52px; }
+  .pcard .pc-pills{ display:flex; gap:5px; flex-wrap:wrap; margin-bottom:12px; }
+  .pcard .pc-pill{ border:1px solid var(--sage); border-radius:20px; padding:3px 9px; font-size:9.5px; color:var(--sage-deep); background:rgba(126,170,139,0.1); }
+  .pcard .pc-foot{ display:flex; justify-content:space-between; align-items:baseline; margin-top:auto; padding-top:12px; border-top:1px solid var(--line); }
+  .pcard .pc-price{ font-family:'EB Garamond',serif; font-size:19px; color:var(--brass-dark); }
+  .pcard .pc-spec{ font-size:10.5px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.03em; }
+  .pc-link{ display:block; margin-top:12px; text-align:center; font-size:11px; letter-spacing:.08em; text-transform:uppercase; padding:9px; border-radius:8px; border:1px solid var(--line-strong); color:var(--ink); transition:all .2s; }
+  .pc-link:hover{ border-color:var(--brass); color:var(--brass-dark); }
+  .pc-link.disabled{ color:var(--gray); cursor:not-allowed; border-style:dashed; }
+  .pcard .pc-flag{ position:absolute; top:14px; right:14px; background:var(--ox); color:#fff; font-size:8.5px; letter-spacing:.08em; text-transform:uppercase; padding:3px 8px; border-radius:999px; font-weight:800; }
+
+  .duelers-feature{ padding:36px 32px 90px; max-width:1240px; margin:0 auto; }
+  .duelers-feature .lineup-grid{ margin-top:8px; }
+
+  .retailer-cta{
+    position:relative; background:
+      linear-gradient(rgba(33,24,24,0.72), rgba(33,24,24,0.72)),
+      url('https://i.ibb.co/JWtVGzWD/retailers-contact-background-1.jpg');
+    background-size:cover; background-position:center;
+    padding:90px 32px; text-align:center; color:var(--cream);
+  }
+  .retailer-cta .eyebrow.on-dark{ display:block; margin-bottom:14px; }
+  .retailer-cta h2{ color:#fff; font-size:32px; margin-bottom:14px; }
+  .retailer-cta p{ color:var(--cream-dim); font-size:14.5px; max-width:52ch; margin:0 auto; }
+
+  @media (max-width: 980px){
+    .catgrid, .catgrid.cols-3, .catgrid.cols-5{ grid-template-columns:repeat(2,1fr); }
+  }
+  @media (max-width: 620px){
+    .catgrid, .catgrid.cols-3, .catgrid.cols-5{ grid-template-columns:1fr; }
+    .catsection{ padding:60px 20px; }
+  }
+</style>
+
+</head>
+<body>
+
+<div class="topbar"><b>Concept Preview</b> &nbsp;·&nbsp; Sample "All Spirits" Landing Page for blackhatdistillery.com &nbsp;·&nbsp; Must be 21+ to purchase</div>
+
+<header>
+  <div class="headrow">
+    <a class="logo" href="#top">
+      <div class="logo-mark"><img src="https://i.ibb.co/KknVGFH/path155.png" alt="Blackhat Distillery logo"></div>
+      <div>
+        <div class="logo-word">BLACK<span>HAT</span></div>
+        <div class="logo-sub">Distillery · Colorado Springs</div>
+      </div>
+    </a>
+    <nav class="mainnav">
+      <a href="#top">Our Spirits</a>
+      <a href="#duelers-top">Duelers</a>
+      <a href="#">Our Story</a>
+      <a href="#">Tours &amp; Events</a>
+    </nav>
+    <div class="head-actions">
+      <a class="cart-btn" href="#">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L22 8H6"/><circle cx="9" cy="21" r="1.4"/><circle cx="18" cy="21" r="1.4"/></svg>
+        Cart<span class="cart-count" id="cartCount">0</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="crumbs" id="top">
+  <a href="#">Home</a><span class="sep">/</span><span class="current">All Spirits</span>
+</div>
+
+<!-- DUELERS — FEATURED / MAIN PRODUCT LINE -->
+<div class="hero-header" id="duelers-top">
+  <div class="hero-header-in">
+    <div class="catalog-hero-label">
+      <span class="eyebrow on-dark">The Flagship Line</span>
+      <h1>The Duelers Collection</h1>
+      <p>Our main product line and the centerpiece of the catalog — four hand-painted American Agave Spirit expressions, each with its own full product page.</p>
+      <div class="hero-banner-card">
+        <img class="hero-banner" src="https://i.ibb.co/TMWxhJmQ/Duelers-full-line-1.png" alt="The full Duelers lineup — Blanco, Dark, Dark Double Oaked, and Midnight">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="featured-band">
+  <div class="duelers-feature">
+    <main class="pdp" style="padding-bottom:50px;">
+      <div class="reveal">
+        <div class="gallery-stage" id="duelStage">
+          <div class="ground-shadow"></div>
+          <span class="badge-corner" id="duelBadge">Double Oaked · 2× Silver</span>
+          <div class="bottle-scene" id="duelScene">
+            <img id="duelHeroImg" src="https://i.ibb.co/Kxq4brvP/Dueler-Dark-Double-Oaked-H080326.webp" alt="Duelers Dark Double Oaked bottle">
+          </div>
+          <span class="zoom-hint">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            Click to zoom
+          </span>
+        </div>
+        <div class="thumbs-label">
+          <span class="eyebrow">Explore the Duelers Line</span>
+          <span class="hint">Click an expression to preview</span>
+        </div>
+        <div class="thumbs" id="duelThumbs">
+          <div class="thumb active" data-key="doubleoaked"><img src="https://i.ibb.co/Kxq4brvP/Dueler-Dark-Double-Oaked-H080326.webp" alt="Dark Double Oaked"><span class="cap">Double Oaked</span></div>
+          <div class="thumb" data-key="blanco"><img src="https://i.ibb.co/j7XWzQV/Duelers-Blanco-H080326.webp" alt="Blanco"><span class="cap">Blanco</span></div>
+          <div class="thumb" data-key="dark"><img src="https://i.ibb.co/zWtKBRBC/Duelers-Dark-H080326.webp" alt="Dark"><span class="cap">Dark</span></div>
+          <div class="thumb" data-key="midnight"><img src="https://i.ibb.co/LzvxSCPx/Duelers-Midnight-H080326.webp" alt="Midnight"><span class="cap">Midnight</span></div>
+        </div>
+      </div>
+
+      <div class="buybox reveal">
+        <span class="eyebrow">Duelers · <span id="duelCategory">Double Oaked Agave Spirit</span></span>
+        <h2 id="duelName" style="font-size:38px;margin-bottom:14px;">Dark Double Oaked</h2>
+        <p class="desc" id="duelDesc"></p>
+        <div class="specpills">
+          <div class="specpill"><b id="duelAbv">50%</b>ABV</div>
+          <div class="specpill"><b id="duelProof">100</b>Proof</div>
+          <div class="specpill"><b>750ml</b>Bottle</div>
+        </div>
+        <div class="flavorpills" id="duelFlavor"></div>
+        <div class="priceline">
+          <span class="price" id="duelPrice">$125.00</span>
+          <span class="price-note" style="border-style:solid;">SRP</span>
+        </div>
+        <div class="skuline" id="duelSku">SKU BHTR-DDDO* · UPC 198715908244</div>
+        <a class="pc-link" id="duelCta" href="blackhat-duelers-pdp-concept.html" style="display:block;max-width:280px;margin-top:14px;">View Full Product Page →</a>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- WHISKEY & BOURBON -->
+<section class="catsection reveal" id="whiskey-bourbon">
+  <div class="catsection-head">
+    <div><span class="eyebrow">Blackhat Line</span><h2 style="margin-top:8px;">Whiskey &amp; Bourbon</h2></div>
+    <p>Five expressions, from the everyday Blackhat Whiskey to limited beer-barrel finishing series releases.</p>
+  </div>
+  <div class="catgrid">
+    <div class="pcard">
+        
+        <div class="pc-img"><img src="https://i.ibb.co/9m1HKqnb/Whiskey-H080326.webp" alt="Blackhat Whiskey"></div>
+        <div class="pc-cat">Straight Bourbon Whiskey</div>
+        <h3>Blackhat Whiskey</h3>
+        <div class="pc-flavor">Smooth, approachable, and balanced</div>
+        <p class="pc-desc">Crafted for easy enjoyment while still offering depth and character. A bright, nutty aroma with hints of fruit opens into a soft caramel palate.</p>
+        <div class="pc-pills"><span class="pc-pill">Nutty</span><span class="pc-pill">Caramel</span><span class="pc-pill">Fruit</span><span class="pc-pill">Toasted Oak</span></div>
+        <div class="pc-foot">
+          <span class="pc-price">$45.99</span>
+          <span class="pc-spec">40% ABV · 80 Proof</span>
+        </div>
+        <a class="pc-link" href="blackhat-whiskey-pdp-concept.html">View Product Page →</a>
+      </div><div class="pcard">
+        <div class="pc-img"><img src="https://i.ibb.co/Z1bPtxvM/Bourbon-Whiskey-H080326.webp" alt="Blackhat Bourbon"></div>
+        <div class="pc-cat">Blended Bourbon Whiskey</div>
+        <h3>Blackhat Bourbon</h3>
+        <div class="pc-flavor">Rich, spiced, and elegant</div>
+        <p class="pc-desc">Our signature expression — aged a minimum of 4 years from a proprietary blend of two distinct bourbons. Honeyed sweetness and floral aromatics lead into rich spice, caramel, and toffee.</p>
+        <div class="pc-pills"><span class="pc-pill">Honey</span><span class="pc-pill">Rye Spice</span><span class="pc-pill">Caramel</span><span class="pc-pill">Toffee</span></div>
+        <div class="pc-foot">
+          <span class="pc-price">$59.99</span>
+          <span class="pc-spec">50% ABV · 100 Proof</span>
+        </div>
+        <span class="pc-link disabled">Product Page Coming Soon</span>
+      </div><div class="pcard">
+        
+        <div class="pc-img"><img src="https://i.ibb.co/rKpG4X8q/Bourbon-Barrel-Strength.webp" alt="Barrel Strength Bourbon"></div>
+        <div class="pc-cat">Barrel Strength Bourbon (53.5% ABV)</div>
+        <h3>Barrel Strength Bourbon</h3>
+        <div class="pc-flavor">Bold, powerful, and full-bodied</div>
+        <p class="pc-desc">A full-strength expression of Blackhat craftsmanship — dark brown sugar, toasted oak, maple toffee, and warm baking spice, with a long, warming finish.</p>
+        <div class="pc-pills"><span class="pc-pill">Brown Sugar</span><span class="pc-pill">Oak</span><span class="pc-pill">Maple</span><span class="pc-pill">Nutmeg</span></div>
+        <div class="pc-foot">
+          <span class="pc-price">$150.00</span>
+          <span class="pc-spec">53.5% ABV · 107 Proof</span>
+        </div>
+        <span class="pc-link disabled">Product Page Coming Soon</span>
+      </div><div class="pcard">
+        
+        <div class="pc-img"><img src="https://i.ibb.co/TD8JK0Hk/Bourbon-Whiskey-Stout-Barrel-H080326.webp" alt="Blackhat Stout Bourbon"></div>
+        <div class="pc-cat">Beer-Finished Bourbon</div>
+        <h3>Blackhat Stout Bourbon</h3>
+        <div class="pc-flavor">Robust, roasted, and expressive</div>
+        <p class="pc-desc">Small-batch Blackhat Bourbon finished in used stout beer barrels after initial aging in new oak. Notes of roasted coffee and dark chocolate.</p>
+        <div class="pc-pills"><span class="pc-pill">Coffee</span><span class="pc-pill">Toffee</span><span class="pc-pill">Nutty</span><span class="pc-pill">Oak</span></div>
+        <div class="pc-foot">
+          <span class="pc-price">$150.00</span>
+          <span class="pc-spec">50% ABV · 100 Proof</span>
+        </div>
+        <span class="pc-link disabled">Product Page Coming Soon</span>
+      </div><div class="pcard">
+        
+        <div class="pc-img"><img src="https://i.ibb.co/TBb9zZJy/Bourbon-Whiskey-Barley-Wine-H080326.webp" alt="Barley Wine Bourbon"></div>
+        <div class="pc-cat">Beer-Finished Bourbon</div>
+        <h3>Barley Wine Bourbon</h3>
+        <div class="pc-flavor">Malty, sweet, and layered</div>
+        <p class="pc-desc">Small-batch Blackhat Bourbon finished in used barley wine beer barrels after initial aging in new oak. Rich notes of toffee, caramel, and dried fruit.</p>
+        <div class="pc-pills"><span class="pc-pill">Toffee</span><span class="pc-pill">Malt</span><span class="pc-pill">Nutty</span><span class="pc-pill">Dried Fruit</span></div>
+        <div class="pc-foot">
+          <span class="pc-price">$125.00</span>
+          <span class="pc-spec">40% ABV · 80 Proof</span>
+        </div>
+        <span class="pc-link disabled">Product Page Coming Soon</span>
+      </div>
+  </div>
+</section>
+
+<!-- CORE SPIRITS -->
+<section class="catsection reveal" id="core-spirits">
+  <div class="catsection-head">
+    <div><span class="eyebrow">Blackhat Line</span><h2 style="margin-top:8px;">Agave, Gin, Rum &amp; Vodka</h2></div>
+    <p>The foundational Blackhat spirits — including the original agave recipe that led to Duelers.</p>
+  </div>
+  <div class="catgrid">
+    <div class="pcard">
+        
+        <div class="pc-img"><img src="https://i.ibb.co/sJFY6rPM/Agave-H080326.webp" alt="Blackhat Agave"></div>
+        <div class="pc-cat">Agave Spirit</div>
+        <h3>Blackhat Agave</h3>
+        <div class="pc-flavor">Grassy with citrus</div>
+        <p class="pc-desc">The Blackhat classic — crafted from 100% Blue Weber Agave and blended with pure Rocky Mountain water. Our first agave recipe and a smooth, flavorful cornerstone of the lineup.</p>
+        <div class="pc-pills"><span class="pc-pill">Grassy</span><span class="pc-pill">Citrus</span><span class="pc-pill">Agave</span></div>
+        <div class="pc-foot">
+          <span class="pc-price">$29.99</span>
+          <span class="pc-spec">40% ABV · 80 Proof</span>
+        </div>
+        <span class="pc-link disabled">Product Page Coming Soon</span>
+      </div><div class="pcard">
+        
+        <div class="pc-img"><img src="https://i.ibb.co/HDMwxct9/Gin-H080326.webp" alt="Blackhat Gin"></div>
+        <div class="pc-cat">Blended Gin</div>
+        <h3>Blackhat Gin</h3>
+        <div class="pc-flavor">Botanical, citrus forward</div>
+        <p class="pc-desc">A bold and captivating signature gin, blended with meticulous precision for a crisp, assertive character.</p>
+        <div class="pc-pills"><span class="pc-pill">Citrus</span><span class="pc-pill">Orange</span><span class="pc-pill">Juniper</span></div>
+        <div class="pc-foot">
+          <span class="pc-price">$24.99</span>
+          <span class="pc-spec">40% ABV · 80 Proof</span>
+        </div>
+        <span class="pc-link disabled">Product Page Coming Soon</span>
+      </div><div class="pcard">
+        
+        <div class="pc-img"><img src="https://i.ibb.co/7dr2ZBQx/Rum-H080326.webp" alt="Blackhat Rum"></div>
+        <div class="pc-cat">Caribbean Blended Rum</div>
+        <h3>Blackhat Rum</h3>
+        <div class="pc-flavor">Robust with tropical sweetness</div>
+        <p class="pc-desc">The vibrant essence of the Caribbean — a masterfully crafted blend that brings the heart of the islands straight to your glass.</p>
+        <div class="pc-pills"><span class="pc-pill">Fruity</span><span class="pc-pill">Oak</span><span class="pc-pill">Sweet & Spice</span></div>
+        <div class="pc-foot">
+          <span class="pc-price">$27.99</span>
+          <span class="pc-spec">40% ABV · 80 Proof</span>
+        </div>
+        <span class="pc-link disabled">Product Page Coming Soon</span>
+      </div><div class="pcard">
+        
+        <div class="pc-img"><img src="https://i.ibb.co/20jCrLgN/Vodka.webp" alt="Blackhat Vodka"></div>
+        <div class="pc-cat">Wheat Vodka</div>
+        <h3>Blackhat Vodka</h3>
+        <div class="pc-flavor">Light, crisp, and subtly sweet</div>
+        <p class="pc-desc">Made from 100% German wheat and blended with pure Rocky Mountain water — easy to mix, easy to sip, exceptionally smooth.</p>
+        <div class="pc-pills"><span class="pc-pill">Crisp</span><span class="pc-pill">Light Sweetness</span><span class="pc-pill">Creamy</span></div>
+        <div class="pc-foot">
+          <span class="pc-price">$24.99</span>
+          <span class="pc-spec">40% ABV · 80 Proof</span>
+        </div>
+        <span class="pc-link disabled">Product Page Coming Soon</span>
+      </div>
+  </div>
+</section>
+
+<!-- ROYALS + REBELS -->
+<section class="catsection reveal" id="royals-rebels">
+  <div class="catsection-head">
+    <div><span class="eyebrow">Distilled Products</span><h2 style="margin-top:8px;">Royals + Rebels Rum</h2></div>
+    <p>Three aged and flavored rum expressions under the Royals + Rebels name.</p>
+  </div>
+  <div class="catgrid cols-3">
+    <div class="pcard">
+        
+        <div class="pc-img"><img src="https://i.ibb.co/B2pYkKmK/Royals-Rebels-Rum.webp" alt="Royals + Rebels Rum"></div>
+        <div class="pc-cat">Aged Rum</div>
+        <h3>Royals + Rebels Rum</h3>
+        <div class="pc-flavor">Robust and spiced</div>
+        <p class="pc-desc">Crafted from cane sugar and molasses, delivering notes of fruit, spice, and light brown sugar.</p>
+        <div class="pc-pills"><span class="pc-pill">Spiced Oak</span><span class="pc-pill">Stone Fruit</span><span class="pc-pill">Pepper</span></div>
+        <div class="pc-foot">
+          <span class="pc-price">$39.99</span>
+          <span class="pc-spec">42.5% ABV · 85 Proof</span>
+        </div>
+        <span class="pc-link disabled">Product Page Coming Soon</span>
+      </div><div class="pcard">
+        
+        <div class="pc-img"><img src="https://i.ibb.co/b9Z5M3v/Royals-Rebels-Island-Rum.webp" alt="Royals + Rebels Island Rum"></div>
+        <div class="pc-cat">Aged Rum</div>
+        <h3>Royals + Rebels Island Rum</h3>
+        <div class="pc-flavor">Molasses forward</div>
+        <p class="pc-desc">A traditional rum created from 100% molasses, delivering notes of licorice, baking spice, and dark brown sugar.</p>
+        <div class="pc-pills"><span class="pc-pill">Molasses</span><span class="pc-pill">Anise</span><span class="pc-pill">Dark Brown Sugar</span></div>
+        <div class="pc-foot">
+          <span class="pc-price">$49.99</span>
+          <span class="pc-spec">40% ABV · 80 Proof</span>
+        </div>
+        <span class="pc-link disabled">Product Page Coming Soon</span>
+      </div><div class="pcard">
+        
+        <div class="pc-img"><img src="https://i.ibb.co/3y1fG019/Royals-Rebels-Vanilla-Rum-H080326.webp" alt="Royals + Rebels Vanilla Rum"></div>
+        <div class="pc-cat">Flavored Rum</div>
+        <h3>Royals + Rebels Vanilla Rum</h3>
+        <div class="pc-flavor">Delicate vanilla</div>
+        <p class="pc-desc">Sweet, warm vanilla notes and a bold finish.</p>
+        <div class="pc-pills"><span class="pc-pill">Vanilla</span><span class="pc-pill">Fruity</span><span class="pc-pill">Smooth</span></div>
+        <div class="pc-foot">
+          <span class="pc-price">$125.00</span>
+          <span class="pc-spec">40% ABV · 80 Proof</span>
+        </div>
+        <span class="pc-link disabled">Product Page Coming Soon</span>
+      </div>
+  </div>
+</section>
+
+<!-- LIQUEURS & SPECIALTY -->
+<section class="catsection reveal" id="liqueurs">
+  <div class="catsection-head">
+    <div><span class="eyebrow">Blackhat Line</span><h2 style="margin-top:8px;">Liqueurs &amp; Specialty</h2></div>
+    <p>Specialty rum, limoncello, triple sec, and two coffee liqueurs — including one that supports the LALMBA organization.</p>
+  </div>
+  <div class="catgrid cols-5">
+    <div class="pcard">
+        
+        <div class="pc-img"><img src="https://i.ibb.co/3ycZNzbW/Golden-Hearth-H080326.webp" alt="Golden Hearth Cinnamon Pineapple Rum"></div>
+        <div class="pc-cat">Specialty Rum</div>
+        <h3>Golden Hearth Cinnamon Pineapple Rum</h3>
+        <div class="pc-flavor">Cinnamon and pineapple</div>
+        <p class="pc-desc">A sweet and fruity specialty rum with a touch of spice — warm cinnamon aroma with a rich palate of pineapple and vanilla.</p>
+        <div class="pc-pills"><span class="pc-pill">Cinnamon</span><span class="pc-pill">Pineapple</span><span class="pc-pill">Vanilla</span></div>
+        <div class="pc-foot">
+          <span class="pc-price">$49.99</span>
+          <span class="pc-spec">25% ABV · 50 Proof</span>
+        </div>
+        <span class="pc-link disabled">Product Page Coming Soon</span>
+      </div><div class="pcard">
+        
+        <div class="pc-img"><img src="https://i.ibb.co/k6VQd9Vg/Lucciola-H080326-1.webp" alt="Lucciola Limoncello"></div>
+        <div class="pc-cat">Lemon Liqueur (Enjoy Chilled)</div>
+        <h3>Lucciola Limoncello</h3>
+        <div class="pc-flavor">Tart lemon with rum undertones</div>
+        <p class="pc-desc">A vibrant blend of citrus brilliance, crafted with Blackhat's award-winning Royals and Rebels Rum for added depth and complexity.</p>
+        <div class="pc-pills"><span class="pc-pill">Lemonade</span><span class="pc-pill">Tart</span><span class="pc-pill">Rum</span></div>
+        <div class="pc-foot">
+          <span class="pc-price">$49.99</span>
+          <span class="pc-spec">30% ABV · 60 Proof</span>
+        </div>
+        <span class="pc-link disabled">Product Page Coming Soon</span>
+      </div><div class="pcard">
+        <div class="pc-img"><img src="https://i.ibb.co/FLPGnWtf/Triple-Sec-H080326.webp" alt="Triple Sec"></div>
+        <div class="pc-cat">Orange Liqueur</div>
+        <h3>Triple Sec</h3>
+        <div class="pc-flavor">Sweet orange</div>
+        <p class="pc-desc">A vibrant blend of citrus flavors made from hand-peeled oranges — bold, sun-ripened zest balanced by a smooth, velvety finish.</p>
+        <div class="pc-pills"><span class="pc-pill">Orange Citrus</span><span class="pc-pill">Sugar</span></div>
+        <div class="pc-foot">
+          <span class="pc-price">$29.99</span>
+          <span class="pc-spec">30% ABV · 60 Proof</span>
+        </div>
+        <span class="pc-link disabled">Product Page Coming Soon</span>
+      </div><div class="pcard">
+        <div class="pc-img"><img src="https://i.ibb.co/DfddrdN6/Galletoo.webp" alt="Galletoo"></div>
+        <div class="pc-cat">Coffee Liqueur</div>
+        <h3>Galletoo</h3>
+        <div class="pc-flavor">Bold, complex, and expressive</div>
+        <p class="pc-desc">High-end coffee liqueur made with real African coffee beans — silky, full-bodied, with proceeds benefiting the LALMBA organization.</p>
+        <div class="pc-pills"><span class="pc-pill">Coffee</span><span class="pc-pill">Bright Acidity</span><span class="pc-pill">Vanilla</span></div>
+        <div class="pc-foot">
+          <span class="pc-price">$49.00</span>
+          <span class="pc-spec">32% ABV · 64 Proof</span>
+        </div>
+        <span class="pc-link disabled">Product Page Coming Soon</span>
+      </div><div class="pcard">
+        <div class="pc-img"><img src="https://i.ibb.co/q3R95HwW/Lebowski-s-Kool-Coffee-Liqueur.webp" alt="Lebowski's Kool Coffee Liqueur"></div>
+        <div class="pc-cat">Coffee Liqueur</div>
+        <h3>Lebowski's Kool Coffee Liqueur</h3>
+        <div class="pc-flavor">Coffee balanced with vanilla sweetness</div>
+        <p class="pc-desc">Made with premium vodka and the finest Colombian coffee — smooth, rich, with hints of sweetness and a velvety finish.</p>
+        <div class="pc-pills"><span class="pc-pill">Coffee</span><span class="pc-pill">Vanilla</span></div>
+        <div class="pc-foot">
+          <span class="pc-price">$42.99</span>
+          <span class="pc-spec">20% ABV · 40 Proof</span>
+        </div>
+        <span class="pc-link disabled">Product Page Coming Soon</span>
+      </div>
+  </div>
+</section>
+
+<!-- PRIVATE LABEL -->
+<section class="catsection reveal" id="private-label">
+  <div class="catsection-head">
+    <div><span class="eyebrow">Private Label</span><h2 style="margin-top:8px;">Tanto Vodka</h2></div>
+    <p>Produced for a private-label partner brand.</p>
+  </div>
+  <div class="catgrid cols-3">
+    <div class="pcard">
+        <div class="pc-img"><img src="https://i.ibb.co/H3Tt1Gk/Tanto-Vodka-2.webp" alt="Tanto Vodka"></div>
+        <div class="pc-cat">Wheat Vodka · Private Label</div>
+        <h3>Tanto Vodka</h3>
+        <div class="pc-flavor">Light, crisp, and subtly sweet</div>
+        <p class="pc-desc">A premium American vodka that embodies the resilience of its founders, Ben Morgan and Kris “Tanto” Paronto, former members of the elite 75th Ranger Regiment.</p>
+        <div class="pc-pills"><span class="pc-pill">Crisp</span><span class="pc-pill">Light Sweetness</span><span class="pc-pill">Creamy</span></div>
+        <div class="pc-foot">
+          <span class="pc-price">$26.99</span>
+          <span class="pc-spec">40% ABV · 80 Proof</span>
+        </div>
+        <span class="pc-link disabled">Product Page Coming Soon</span>
+      </div>
+  </div>
+</section>
+
+<section class="retailer-cta reveal">
+  <span class="eyebrow on-dark">Find Blackhat Near You</span>
+  <h2>Available at Retailers Across Colorado</h2>
+  <p>All 22 Blackhat Distillery spirits are sold through retail partners rather than shipped direct — ask your local liquor store, or check with the distillery for current locations.</p>
+</section>
+
+<footer>
+  <div class="foot-in">
+    <div class="foot-left">
+      <div class="logo-mark"><img src="https://i.ibb.co/KknVGFH/path155.png" alt="Blackhat Distillery logo"></div>
+      <div>
+        <div class="logo-word">BLACK<span>HAT</span></div>
+        <p>3104 N Nevada Ave Ste 120, Colorado Springs, CO 80907. Please enjoy responsibly — must be 21+ to purchase.</p>
+      </div>
+    </div>
+    <div class="foot-right">
+      <div class="foot-col">
+        <span>Shop</span>
+        <a href="#duelers-top">Duelers</a>
+        <a href="#whiskey-bourbon">Whiskey &amp; Bourbon</a>
+        <a href="#core-spirits">Core Spirits</a>
+        <a href="#liqueurs">Liqueurs</a>
+      </div>
+      <div class="foot-col">
+        <span>Distillery</span>
+        <a href="#">Tours &amp; Events</a>
+        <a href="#">Barrel Program</a>
+        <a href="#">Retailers</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Blackhat Distillery. Design concept prepared for internal review — not a live page.</span>
+    <span>PDP Concept — All Spirits (22 Products)</span>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-close" id="lightboxClose">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    Close
+  </div>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<div class="concept-panel" id="conceptPanel">
+  <h5>About This Concept — All-Spirits Landing Page</h5>
+  <ul>
+    <li>All 22 products from your spreadsheet are represented here, grouped by category: Duelers (featured/main line at top, interactive), Whiskey &amp; Bourbon (5), Core Spirits — Agave/Gin/Rum/Vodka (4), Royals + Rebels Rum (3), Liqueurs &amp; Specialty (5), and Private Label (Tanto Vodka).</li>
+    <li>Duelers is treated as the flagship line per your direction — its own featured band at the top with the same interactive bottle switcher, plus a link out to its full, dedicated PDP.</li>
+    <li>Blackhat Whiskey also links out to its own full PDP (built in the last round). The other 20 products show as catalog cards only — full individual PDPs haven't been built for those yet, so their "product page" links are marked as pending rather than going anywhere.</li>
+    <li>All 22 products now have real photos — Tanto Vodka, Blackhat Bourbon, Triple Sec, Galletoo, and Lebowski's Kool Coffee Liqueur were the last five and their links have since been fixed.</li>
+    <li>Card copy uses the short description and price straight from your product spreadsheet, plus the Category/Flavor Profile/Key Flavor Notes from your tasting notes document.</li>
+    <li>Still open, same as before: awards module behavior with no confirmed awards, FourHawk color/font specs, and content plans (Craft/Artist Spotlight) for non-Duelers lines.</li>
+  </ul>
+</div>
+<div class="concept-badge" id="conceptBadge">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+  Concept Notes
+</div>
+
+<script>
+  const DUELERS = {
+    doubleoaked: {
+      name:'Dark Double Oaked', category:'Double Oaked Agave Spirit',
+      badge:'Dark Double Oaked · 2× Silver',
+      img:'https://i.ibb.co/Kxq4brvP/Dueler-Dark-Double-Oaked-H080326.webp',
+      abv:'50%', proof:'100', price:'$125.00', sku:'BHTR-DDDO*', upc:'198715908244',
+      flavorNotes:['Cinnamon','Dried Fruit','Espresso','Toasted Oak'],
+      desc:"<b>Deep, spiced, and structured.</b> Aromas of cinnamon, baking spice, and toasted wood give way to layered notes of dried fig and raisin with a hint of espresso."
+    },
+    blanco: {
+      name:'Blanco', category:'Unaged Agave Spirit',
+      badge:'Blanco · Core Expression',
+      img:'https://i.ibb.co/j7XWzQV/Duelers-Blanco-H080326.webp',
+      abv:'40%', proof:'80', price:'$74.99', sku:'BHTR-DB', upc:'860002857459',
+      flavorNotes:['Earthy','Herbal','Citrus','Pepper','Minerality'],
+      desc:"<b>Opens clean and earthy</b>, with distinct mineral notes lifted by a touch of citrus zest. The finish is long and bright, with black pepper, faint agave sweetness, and a lively, tingly mouthfeel."
+    },
+    dark: {
+      name:'Dark', category:'Aged Agave Spirit',
+      badge:'Dark · Bronze Medalist',
+      img:'https://i.ibb.co/zWtKBRBC/Duelers-Dark-H080326.webp',
+      abv:'40%', proof:'80', price:'$89.99', sku:'BHTR-DD', upc:'860002857442',
+      flavorNotes:['Vanilla','Oak','Citrus','Pepper'],
+      desc:"<b>Delivers a balanced sweet and spice profile.</b> Bright vanilla and candied citrus peel lead into soft caramel, lightly toasted oak, and a touch of baking spice."
+    },
+    midnight: {
+      name:'Midnight', category:'Barrel-Proof Aged Agave Spirit',
+      badge:'Midnight · Gold Best in Class',
+      img:'https://i.ibb.co/LzvxSCPx/Duelers-Midnight-H080326.webp',
+      abv:'55%', proof:'110', price:'$150.00', sku:'BHTR-DM', upc:'198715909739',
+      flavorNotes:['Dark Chocolate','Caramel','Spice','Oak'],
+      desc:"<b>Bold, rich, and layered</b> — a whiskey-lover's expression. Deep caramel and toasted oak aromas lead into dark chocolate, warm baking spices, and a hint of orange peel."
+    }
+  };
+
+  function renderFlavorNotes(container, notes){
+    container.innerHTML = (notes||[]).map(f => `<span class="flavorpill">${f}</span>`).join('');
+  }
+
+  function switchDueler(key){
+    const p = DUELERS[key];
+    if(!p) return;
+    document.getElementById('duelName').textContent = p.name;
+    document.getElementById('duelCategory').textContent = p.category;
+    document.getElementById('duelBadge').textContent = p.badge;
+    document.getElementById('duelHeroImg').src = p.img;
+    document.getElementById('duelHeroImg').alt = 'Duelers ' + p.name + ' bottle';
+    document.getElementById('duelDesc').innerHTML = p.desc;
+    document.getElementById('duelAbv').textContent = p.abv;
+    document.getElementById('duelProof').textContent = p.proof;
+    document.getElementById('duelPrice').textContent = p.price;
+    document.getElementById('duelSku').textContent = 'SKU ' + p.sku + ' · UPC ' + p.upc;
+    renderFlavorNotes(document.getElementById('duelFlavor'), p.flavorNotes);
+    document.querySelectorAll('#duelThumbs .thumb').forEach(t => t.classList.toggle('active', t.dataset.key === key));
+    const stage = document.getElementById('duelStage');
+    stage.style.opacity = 0.35;
+    setTimeout(()=>{ stage.style.opacity = 1; }, 180);
+  }
+  switchDueler('doubleoaked');
+  document.querySelectorAll('#duelThumbs .thumb').forEach(t=>{
+    t.addEventListener('click', ()=> switchDueler(t.dataset.key));
+  });
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{ threshold:0.1 });
+  revealEls.forEach(el=>io.observe(el));
+
+  // Bottle tilt on mouse move (Duelers hero only)
+  const duelStage = document.getElementById('duelStage');
+  const duelScene = document.getElementById('duelScene');
+  duelStage.addEventListener('mousemove', (e)=>{
+    const r = duelStage.getBoundingClientRect();
+    const x = (e.clientX - r.left)/r.width - 0.5;
+    const y = (e.clientY - r.top)/r.height - 0.5;
+    duelScene.style.transform = `rotateY(${x*14}deg) rotateX(${-y*10}deg) translateZ(10px)`;
+  });
+  duelStage.addEventListener('mouseleave', ()=>{ duelScene.style.transform = 'rotateY(0) rotateX(0)'; });
+
+  // Lightbox on stage click
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  duelStage.addEventListener('click', ()=>{
+    lightboxImg.src = document.getElementById('duelHeroImg').src;
+    lightbox.classList.add('show');
+  });
+  document.getElementById('lightboxClose').addEventListener('click', ()=> lightbox.classList.remove('show'));
+  lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) lightbox.classList.remove('show'); });
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') lightbox.classList.remove('show'); });
+
+  // Concept badge toggle
+  const conceptBadge = document.getElementById('conceptBadge');
+  const conceptPanel = document.getElementById('conceptPanel');
+  conceptBadge.addEventListener('click', ()=> conceptPanel.classList.toggle('show'));
+  document.addEventListener('click', (e)=>{
+    if(!conceptPanel.contains(e.target) && !conceptBadge.contains(e.target)){ conceptPanel.classList.remove('show'); }
+  });
+</script>
+</body>
+</html>
