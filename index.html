@@ -554,10 +554,6 @@
         <div class="thumb-stage"><img src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FTB1JMZxV%2FBlackhat-Vodka.webp&w=1000&q=80&output=webp" alt="Blackhat Vodka" loading="lazy" decoding="async"></div>
         <span class="cap">Blackhat Vodka</span>
       </div>
-      <div class="thumb" data-key="triplesec">
-        <div class="thumb-stage"><img src="https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FWvCX29ss%2FTriple-Sec.webp&w=1000&q=80&output=webp" alt="Triple Sec" loading="lazy" decoding="async"></div>
-        <span class="cap">Triple Sec</span>
-      </div>
     </div>
     <p style="font-size:11px;color:var(--ink-soft);margin-top:12px;">Product photography supplied by Blackhat Distillery. Click any bottle above &mdash; the whole page updates to that product, showing how one template drives the full catalog.</p>
   </div>
@@ -917,7 +913,8 @@
     <li>This page reuses your existing catalog product photos and follows the exact same layout, tabs, and interaction pattern as the Duelers PDP &mdash; built to show how one template can drive the full 24-page catalog rollout.</li>
     <li>This line is renamed from "Agave, Gin, Rum &amp; Vodka" to <b>Blackhat Classics</b> per your notes — the page filename, nav labels, and cross-links from Royals + Rebels were all updated to match.</li>
     <li>Only Blackhat Agave was distilled on-site, so "small batch Colorado distilled" language has been removed from the shared page copy per your notes; ABV/proof for Agave, Rum, and Vodka weren't restated in your edit notes and remain unconfirmed draft values.</li>
-    <li>Blackhat Gin's style bubble now reads "Blended" (was "London Dry") and uses the new bottle photo you sent. Triple Sec has been added to this line per your notes, so it now cross-links here as well as from Liqueurs and Specialties &mdash; note the new story copy and the "Four Core Spirits" panel still describe four spirits, since that wording came from you as-is; flag it back to us if you'd like it updated to reflect five.</li>
+    <li>Blackhat Gin's style bubble now reads "Blended" (was "London Dry") and uses the new bottle photo you sent.</li>
+    <li>Triple Sec was briefly added to this line per an earlier note, but per your latest update it's been removed from here and lives only on the Liqueurs and Specialties page.</li>
   </ul>
 </div>
 <div class="concept-badge" id="conceptBadge">
@@ -1048,35 +1045,6 @@ const MEDAL_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="#93691f" stroke-
         noteTitle:"Sourced for a Pure, Smooth Sip",
         noteText:"We source a wheat-based neutral spirit for flavor, then cut it with Rocky Mountain water for a sip that's pure and smooth."
       }
-    },
-    triplesec: {
-      name:"Triple Sec",
-      category:"Orange Liqueur",
-      badge:"Triple Sec \u00b7 Specialty",
-      img:"https://images.weserv.nl/?url=https%3A%2F%2Fi.ibb.co%2FWvCX29ss%2FTriple-Sec.webp&w=1000&q=80&output=webp",
-      abv:"30%", proof:"60", specLabel:"Style", specValue:"Orange Liqueur",
-      price:"$19.99", sku:"BHTR-TS", upc:"TBD",
-      flavorNotes:["Orange","Cane Sugar","Orange Oil","Sweet"],
-      desc:"<b>Made from hand-peeled oranges</b>, this liqueur delivers a bold, sun-ripened zest balanced by a smooth, velvety finish.",
-      lineupDesc:"A vibrant blend of citrus flavors with real orange peel from hand-peeled oranges, infused in our smooth Blackhat Vodka.",
-      awards:[],
-      notes:[
-        {num:"01 \u2014 NOSE", title:"Orange Peel", text:"Orange."},
-        {num:"02 \u2014 PALATE", title:"Cane Sugar & Orange Oil", text:"Cane sugar and orange oil."},
-        {num:"03 \u2014 FINISH", title:"Clean & Bright", text:"Short and sweet."}
-      ],
-      craftNote:"Made from hand-peeled oranges infused in our smooth Blackhat Vodka for a bold, sun-ripened zest.",
-      factOakTitle:"Orange Liqueur", factOakDesc:"A classic orange liqueur built as a reliable cocktail-building block.",
-      fact1Title:"Four Core Spirits", fact1Desc:"Agave, gin, rum, and vodka, each crafted with its own unique style.",
-      serve:{
-        neatTitle:"As a Cocktail Ingredient",
-        neatText:"Not typically sipped neat \u2014 smooth enough to enjoy on its own if you please, but built as a classic mixer for margaritas, sidecars, and more.",
-        recipeTitle:"Suggested Serve: Classic Margarita",
-        recipeIntro:"The essential use case for a good triple sec.",
-        recipeItems:["2 oz Blackhat Agave or Duelers Blanco","1 oz Triple Sec","1 oz lime juice","Salt rim, optional"],
-        noteTitle:"Built to Mix",
-        noteText:"Blackhat Triple Sec is best used to build your favorite cocktails, but it's smooth enough to enjoy on its own if you please."
-      }
     }
   };
 
@@ -1155,15 +1123,14 @@ function renderAwardRow(container, awards, size, useAgave){
   }
 
   
-  const ORDER = ["agave","gin","rum","vodka","triplesec"];
+  const ORDER = ["agave","gin","rum","vodka"];
   let current = "agave";
 
   const TONE_FILTER = {
     agave: '',
     gin: '',
     rum: '',
-    vodka: '',
-    triplesec: ''
+    vodka: ''
   };
 
   function switchProduct(key){
